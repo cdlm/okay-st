@@ -1,8 +1,13 @@
 Class {
 	#name : #OkConjunction,
-	#superclass : #OkExpression,
+	#superclass : #OkProposition,
 	#category : #'Okay-Core'
 }
+
+{ #category : #composition }
+OkConjunction >> & anotherValidation [
+	^ self extendedWith: anotherValidation
+]
 
 { #category : #testing }
 OkConjunction >> matches: anObject [

@@ -4,6 +4,11 @@ Class {
 	#category : #'Okay-Core'
 }
 
+{ #category : #testing }
+OkValidation class >> isAbstract [
+	^ self == OkValidation
+]
+
 { #category : #composition }
 OkValidation >> & anotherValidation [
 	^ OkConjunction with: self with: anotherValidation

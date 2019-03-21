@@ -4,6 +4,11 @@ Class {
 	#category : #'Okay-Core'
 }
 
+{ #category : #testing }
+OkDiagnostic class >> isAbstract [
+	^ self == OkDiagnostic
+]
+
 { #category : #'instance creation' }
 OkDiagnostic class >> of: anObject accordingTo: aValidation [ 
 	^ self new

@@ -7,8 +7,10 @@ Class {
 { #category : #tests }
 OkayTest >> testConjunctionAcceptsWhenAllOk [
 	| validation subject |
-	validation := Okay anything & Okay anything.
 	subject := Object new.
+	validation := Okay anything
+		& (Okay if: [ :it | it notNil ])
+		& (Okay if: [ :it | it == subject ]).
 
 	self assert: (validation matches: subject).
 ]
@@ -25,8 +27,10 @@ OkayTest >> testConjunctionRejectsUnlessAllOk [
 { #category : #tests }
 OkayTest >> testDisjunctionAcceptsWhenSomeOk [
 	| validation subject |
-	validation := Okay nothing | Okay anything.
 	subject := Object new.
+	validation := Okay nothing
+		| Okay anything
+		| (Okay if: [ :it | it == subject ]).
 
 	self assert: (validation matches: subject).
 ]
@@ -60,4 +64,13 @@ OkayTest >> testValidatesNothing [
 	self deny: (validation matches: subject).
 	self assert: (validation validate: subject) isFailure.
 	self deny: (validation validate: subject) isSuccess
+]
+
+{ #category : #tests }
+OkayTest >> testValidatesPredicate [
+	| validation |
+	validation := Okay if: #even.
+
+	self assert: (validation matches: 2).
+	self deny: (validation matches: 3).
 ]

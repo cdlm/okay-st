@@ -6,10 +6,15 @@ Class {
 
 { #category : #'instance creation' }
 Okay class >> anything [
-	^ OkAnything new
+	^ self if: [ true ]
+]
+
+{ #category : #'instance creation' }
+Okay class >> if: aPredicate [
+	^ OkPredicate from: aPredicate
 ]
 
 { #category : #'instance creation' }
 Okay class >> nothing [
-	^ OkAnything new not
+	^ self if: [ false ]
 ]

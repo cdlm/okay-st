@@ -7,9 +7,14 @@ Class {
 	#category : #'Okay-Core'
 }
 
+{ #category : #'instance creation' }
+OkPredicate class >> from: oneArgumentValuable [
+	^ self new initializePredicate: oneArgumentValuable
+]
+
 { #category : #initialization }
-OkPredicate >> initialize [
-	predicate := [ true ]
+OkPredicate >> initializePredicate: oneArgumentValuable [
+	predicate := oneArgumentValuable
 ]
 
 { #category : #testing }
