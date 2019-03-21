@@ -1,6 +1,6 @@
 Class {
 	#name : #OkNegation,
-	#superclass : #OkValidation,
+	#superclass : #Okay,
 	#instVars : [
 		'validation'
 	],

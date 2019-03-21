@@ -1,6 +1,6 @@
 Class {
 	#name : #OkProposition,
-	#superclass : #OkValidation,
+	#superclass : #Okay,
 	#instVars : [
 		'validations'
 	],

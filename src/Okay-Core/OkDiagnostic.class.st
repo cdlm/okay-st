@@ -1,6 +1,10 @@
 Class {
 	#name : #OkDiagnostic,
 	#superclass : #Object,
+	#instVars : [
+		'subject',
+		'validation'
+	],
 	#category : #'Okay-Core'
 }
 
@@ -11,7 +15,13 @@ OkDiagnostic class >> isAbstract [
 
 { #category : #'instance creation' }
 OkDiagnostic class >> of: anObject accordingTo: aValidation [ 
-	^ self new
+	^ self new initializeSubject: anObject validation: aValidation
+]
+
+{ #category : #initialization }
+OkDiagnostic >> initializeSubject: anObject validation: aValidation [ 
+	subject := anObject.
+	validation := aValidation
 ]
 
 { #category : #testing }
@@ -22,4 +32,13 @@ OkDiagnostic >> isFailure [
 { #category : #testing }
 OkDiagnostic >> isSuccess [
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+OkDiagnostic >> reason [
+	^ String streamContents: [ :str |
+		str
+			print: subject;
+			space;
+			nextPutAll: validation reason ]
 ]

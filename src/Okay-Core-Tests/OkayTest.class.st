@@ -45,11 +45,35 @@ OkayTest >> testDisjunctionRejectsWhenNoneOk [
 ]
 
 { #category : #tests }
+OkayTest >> testPredicateRejectionCustomReason [
+	| rule diagnostic |
+	rule := (Okay if: #even)
+		rejectWith: 'be a multiple of two'.
+	diagnostic := rule validate: 3.
+	
+	self
+		assert: diagnostic reason
+		equals: '3 should be a multiple of two'
+]
+
+{ #category : #tests }
+OkayTest >> testPredicateRejectionDefaultReason [
+	| rule diagnostic |
+	rule := Okay if: #even.
+	diagnostic := rule validate: 3.
+	
+	self
+		assert: diagnostic reason
+		equals: '3 should satisfy #even'
+
+]
+
+{ #category : #tests }
 OkayTest >> testValidatesAnything [
 	| validation subject |
 	validation := Okay anything.
 	subject := Object new.
-	
+
 	self assert: (validation matches: subject).
 	self assert: (validation validate: subject) isSuccess.
 	self deny: (validation validate: subject) isFailure
@@ -60,7 +84,7 @@ OkayTest >> testValidatesNothing [
 	| validation subject |
 	validation := Okay nothing.
 	subject := Object new.
-	
+
 	self deny: (validation matches: subject).
 	self assert: (validation validate: subject) isFailure.
 	self deny: (validation validate: subject) isSuccess
@@ -71,6 +95,7 @@ OkayTest >> testValidatesPredicate [
 	| validation |
 	validation := Okay if: #even.
 
-	self assert: (validation matches: 2).
 	self deny: (validation matches: 3).
+	self assert: (validation matches: 2)
+
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #OkPredicate,
-	#superclass : #OkValidation,
+	#superclass : #Okay,
 	#instVars : [
 		'predicate'
 	],
@@ -10,6 +10,11 @@ Class {
 { #category : #'instance creation' }
 OkPredicate class >> from: oneArgumentValuable [
 	^ self new initializePredicate: oneArgumentValuable
+]
+
+{ #category : #displaying }
+OkPredicate >> defaultReason [
+	^ 'does not satisfy ' , predicate printString
 ]
 
 { #category : #initialization }
