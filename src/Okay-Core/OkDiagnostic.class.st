@@ -18,6 +18,11 @@ OkDiagnostic class >> of: anObject accordingTo: aValidation [
 	^ self new initializeSubject: anObject validation: aValidation
 ]
 
+{ #category : #printing }
+OkDiagnostic >> explainOn: aStream [
+	self subclassResponsibility
+]
+
 { #category : #initialization }
 OkDiagnostic >> initializeSubject: anObject validation: aValidation [ 
 	subject := anObject.
@@ -36,9 +41,5 @@ OkDiagnostic >> isSuccess [
 
 { #category : #accessing }
 OkDiagnostic >> reason [
-	^ String streamContents: [ :str |
-		str
-			print: subject;
-			space;
-			nextPutAll: validation reason ]
+	^ String streamContents: [ :str | self explainOn: str ]
 ]

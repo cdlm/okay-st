@@ -2,7 +2,7 @@ Class {
 	#name : #Okay,
 	#superclass : #Object,
 	#instVars : [
-		'rejectionReason'
+		'description'
 	],
 	#category : #'Okay-Core'
 }
@@ -42,6 +42,11 @@ Okay >> defaultReason [
 	^ self subclassResponsibility
 ]
 
+{ #category : #initialization }
+Okay >> description: expectationString [ 
+	description := expectationString
+]
+
 { #category : #testing }
 Okay >> matches: anObject [
 	^ self subclassResponsibility
@@ -54,12 +59,7 @@ Okay >> not [
 
 { #category : #displaying }
 Okay >> reason [
-	^ rejectionReason ifNil: [ self defaultReason ]
-]
-
-{ #category : #initialization }
-Okay >> rejectWith: aRejectionString [ 
-	rejectionReason := aRejectionString
+	^ description ifNil: [ self defaultReason ]
 ]
 
 { #category : #validation }

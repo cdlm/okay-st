@@ -14,7 +14,7 @@ OkPredicate class >> from: oneArgumentValuable [
 
 { #category : #displaying }
 OkPredicate >> defaultReason [
-	^ 'does not satisfy ' , predicate printString
+	^ 'an object satisfying ' , predicate printString
 ]
 
 { #category : #initialization }

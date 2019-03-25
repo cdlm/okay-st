@@ -45,26 +45,38 @@ OkayTest >> testDisjunctionRejectsWhenNoneOk [
 ]
 
 { #category : #tests }
+OkayTest >> testPredicateAcceptanceCustomReason [
+	| rule diagnostic |
+	rule := (Okay if: #even)
+		description: 'a multiple of two'.
+	diagnostic := rule validate: 2.
+	
+	self
+		assert: diagnostic reason
+		equals: 'Got 2, which is a multiple of two.'
+]
+
+{ #category : #tests }
 OkayTest >> testPredicateRejectionCustomReason [
 	| rule diagnostic |
 	rule := (Okay if: #even)
-		rejectWith: 'be a multiple of two'.
+		description: 'a multiple of two'.
 	diagnostic := rule validate: 3.
 	
 	self
 		assert: diagnostic reason
-		equals: '3 should be a multiple of two'
+		equals: 'Got 3, but expected a multiple of two.'
 ]
 
 { #category : #tests }
 OkayTest >> testPredicateRejectionDefaultReason [
 	| rule diagnostic |
 	rule := Okay if: #even.
-	diagnostic := rule validate: 3.
+	diagnostic := rule validate: 2.
 	
 	self
 		assert: diagnostic reason
-		equals: '3 should satisfy #even'
+		equals: 'Got 2, which is an object satisfying #even.'
 
 ]
 
