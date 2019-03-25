@@ -52,7 +52,7 @@ OkayTest >> testPredicateAcceptanceCustomReason [
 	diagnostic := rule validate: 2.
 	
 	self
-		assert: diagnostic reason
+		assert: diagnostic description
 		equals: 'Got 2, which is a multiple of two.'
 ]
 
@@ -64,7 +64,7 @@ OkayTest >> testPredicateRejectionCustomReason [
 	diagnostic := rule validate: 3.
 	
 	self
-		assert: diagnostic reason
+		assert: diagnostic description
 		equals: 'Got 3, but expected a multiple of two.'
 ]
 
@@ -75,7 +75,7 @@ OkayTest >> testPredicateRejectionDefaultReason [
 	diagnostic := rule validate: 2.
 	
 	self
-		assert: diagnostic reason
+		assert: diagnostic description
 		equals: 'Got 2, which is an object satisfying #even.'
 
 ]

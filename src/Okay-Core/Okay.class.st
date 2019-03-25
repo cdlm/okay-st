@@ -38,8 +38,13 @@ Okay >> acceptanceOf: anObject [
 ]
 
 { #category : #displaying }
-Okay >> defaultReason [
+Okay >> defaultDescription [
 	^ self subclassResponsibility
+]
+
+{ #category : #displaying }
+Okay >> description [
+	^ description ifNil: [ self defaultDescription ]
 ]
 
 { #category : #initialization }
@@ -55,11 +60,6 @@ Okay >> matches: anObject [
 { #category : #composition }
 Okay >> not [
 	^ OkNegation of: self
-]
-
-{ #category : #displaying }
-Okay >> reason [
-	^ description ifNil: [ self defaultReason ]
 ]
 
 { #category : #validation }

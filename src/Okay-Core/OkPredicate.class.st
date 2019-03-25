@@ -13,7 +13,7 @@ OkPredicate class >> from: oneArgumentValuable [
 ]
 
 { #category : #displaying }
-OkPredicate >> defaultReason [
+OkPredicate >> defaultDescription [
 	^ 'an object satisfying ' , predicate printString
 ]
 

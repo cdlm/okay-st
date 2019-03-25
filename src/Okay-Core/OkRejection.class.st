@@ -10,7 +10,7 @@ OkRejection >> explainOn: aStream [
 		nextPutAll: 'Got ';
 		print: subject;
 		nextPutAll: ', but expected ';
-		nextPutAll: validation reason;
+		nextPutAll: validation description;
 		nextPut: $.
 ]
 
