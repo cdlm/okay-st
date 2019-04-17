@@ -4,6 +4,22 @@ Class {
 	#category : #'Okay-Core-Tests'
 }
 
+{ #category : #accessing }
+OkayTest >> expectedFailures [
+	^ #(testCatchesProblems testValidatesFocusedPredicate)
+]
+
+{ #category : #tests }
+OkayTest >> testCatchesProblems [
+	| validation diagnosis |
+	validation := Okay if: #even.
+	
+	self
+		shouldnt: [ diagnosis := validation validate: nil ]
+		raise: MessageNotUnderstood.
+	self assert: diagnosis isFailure
+]
+
 { #category : #tests }
 OkayTest >> testConjunctionAcceptsWhenAllOk [
 	| validation subject |
@@ -89,6 +105,18 @@ OkayTest >> testValidatesAnything [
 	self assert: (validation matches: subject).
 	self assert: (validation validate: subject) isSuccess.
 	self deny: (validation validate: subject) isFailure
+]
+
+{ #category : #tests }
+OkayTest >> testValidatesFocusedPredicate [
+	| validation |
+	validation := Okay
+		focusingOn: [ :subject | subject / 2 ]
+		if: [ :it | it even ].
+
+	self deny: (validation matches: 6).
+	self assert: (validation matches: 4)
+
 ]
 
 { #category : #tests }

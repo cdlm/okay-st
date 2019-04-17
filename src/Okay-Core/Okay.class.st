@@ -13,6 +13,11 @@ Okay class >> anything [
 ]
 
 { #category : #'instance creation' }
+Okay class >> focusingOn: focusBlock if: aPredicate [ 
+	self shouldBeImplemented.
+]
+
+{ #category : #'instance creation' }
 Okay class >> if: aPredicate [
 	^ OkPredicate from: aPredicate
 ]
@@ -27,7 +32,12 @@ Okay class >> nothing [
 	^ self if: [ false ]
 ]
 
-{ #category : #composition }
+{ #category : #'instance creation' }
+Okay class >> unless: aPredicate [
+	^ (OkPredicate from: aPredicate) not
+]
+
+{ #category : #composing }
 Okay >> & anotherValidation [
 	^ OkConjunction with: self with: anotherValidation
 ]
@@ -35,6 +45,11 @@ Okay >> & anotherValidation [
 { #category : #validation }
 Okay >> acceptanceOf: anObject [ 
 	^ OkAcceptance of: anObject accordingTo: self
+]
+
+{ #category : #composing }
+Okay >> allOf: distributionBlock [
+	^ OkForAll of: self over: distributionBlock
 ]
 
 { #category : #displaying }
@@ -52,12 +67,17 @@ Okay >> description: expectationString [
 	description := expectationString
 ]
 
+{ #category : #composing }
+Okay >> focusedOn: aspectBlock [
+	^ OkFocus of: self on: aspectBlock
+]
+
 { #category : #testing }
 Okay >> matches: anObject [
 	^ self subclassResponsibility
 ]
 
-{ #category : #composition }
+{ #category : #composing }
 Okay >> not [
 	^ OkNegation of: self
 ]
@@ -74,7 +94,7 @@ Okay >> validate: anObject [
 		ifFalse: [ self rejectionOf: anObject ]
 ]
 
-{ #category : #composition }
+{ #category : #composing }
 Okay >> | anotherValidation [
 	^ OkDisjunction with: self with: anotherValidation
 ]
